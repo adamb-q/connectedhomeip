@@ -162,7 +162,7 @@ void OTARequestor::OnQueryImageResponse(void * context, const QueryImageResponse
         requestorCore->mOtaRequestorDriver->UpdateNotFound(UpdateNotFoundReason::NotAvailable,
                                                            System::Clock::Seconds32(response.delayedActionTime.ValueOr(0)));
 
-        // SL TODO: Here look for another provider from the default list. If found, query it -- otherwise enter idle 
+        // SL TODO: Here look for another provider from the default list. If found, query it -- otherwise enter idle
         // state. Take into the account when was the last time we queried it.
         requestorCore->RecordNewUpdateState(OTAUpdateStateEnum::kIdle, OTAChangeReasonEnum::kSuccess);
 
@@ -263,7 +263,7 @@ EmberAfStatus OTARequestor::HandleAnnounceOTAProvider(app::CommandHandler * comm
 
 void OTARequestor::ConnectToProvider(OnConnectedAction onConnectedAction)
 {
-    // SL TODO: With every error condition we must restart the default provider timer, enter kIdle state. 
+    // SL TODO: With every error condition we must restart the default provider timer, enter kIdle state.
     // applies to all flavors of the solution
 
     VerifyOrReturn(mOtaRequestorDriver != nullptr, ChipLogError(SoftwareUpdate, "OTA requestor driver not set"));
@@ -504,7 +504,7 @@ CHIP_ERROR OTARequestor::AddDefaultOtaProvider(ProviderLocation::Type const & pr
     // Update the cached provider location if necessary
     UpdateDefaultProviderLocation();
 
-    // 
+    //
 
     return CHIP_NO_ERROR;
 }

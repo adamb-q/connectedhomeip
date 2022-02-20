@@ -54,7 +54,7 @@ uint16_t GenericOTARequestorDriver::GetMaxDownloadBlockSize()
 
 void GenericOTARequestorDriver::HandleError(UpdateFailureState state, CHIP_ERROR error)
 {
-    // Any error encountered by the OTARequestor results a call to this function. The OTARequestor enters the 
+    // Any error encountered by the OTARequestor results a call to this function. The OTARequestor enters the
     // kIdle state, the default providers timer must be started
 
     StartDefaultProvidersTimer();
@@ -79,8 +79,8 @@ void GenericOTARequestorDriver::UpdateNotFound(UpdateNotFoundReason reason, Syst
     // IMPLEMENTATION CHOICE:
     // This implementation chooses to schedule another query with the same provider
 
-    // TODO: Should keep count of retries and stop after 3. 
-    // SL TODO: Add logic to select a different provider. 
+    // TODO: Should keep count of retries and stop after 3.
+    // SL TODO: Add logic to select a different provider.
 
 
     ScheduleDelayedAction(UpdateFailureState::kQuerying, delay,
@@ -125,7 +125,7 @@ void GenericOTARequestorDriver::UpdateDiscontinued()
     StartDefaultProvidersTimer();
 }
 
-// Cancel all OTA update timers 
+// Cancel all OTA update timers
 void GenericOTARequestorDriver::UpdateCancelled()
 {
     // Cancel all OTA Update timers started by  OTARequestorDriver regardless of whether thery are running or not
@@ -164,7 +164,7 @@ void GenericOTARequestorDriver::CancelDelayedAction(System::TimerCompleteCallbac
 // }
 
 
-void GenericOTARequestorDriver::ProcessAnnounceOTAProviders(const ProviderLocationType &providerLocation, 
+void GenericOTARequestorDriver::ProcessAnnounceOTAProviders(const ProviderLocationType &providerLocation,
                                                           app::Clusters::OtaSoftwareUpdateRequestor::OTAAnnouncementReason announcementReason)
 {
     // If reason is URGENT_UPDATE_AVAILABLE, we start OTA immediately. Otherwise, respect the timer value set in mOtaStartDelayMs.
@@ -185,7 +185,7 @@ void GenericOTARequestorDriver::ProcessAnnounceOTAProviders(const ProviderLocati
     }
 
     // IMPLEMENTATION CHOICE:
-    // This implementation of the OTARequestor driver chooses to unconditionally start the query using the Provider specified in this command. 
+    // This implementation of the OTARequestor driver chooses to unconditionally start the query using the Provider specified in this command.
 
     // Point  mProviderNodeId to the announced node and cancel the default providers timer
     mRequestor->SetCurrentProviderLocation(providerLocation);
@@ -263,7 +263,7 @@ void GenericOTARequestorDriver::DriverTriggerQuery()
     //         mRequestor->SetCurrentProviderLocation(*pl);
     //         return Loop::Break;
     //                             });
- 
+
     // mRequestor->SetCurrentProviderLocation(*pl);
 
     mRequestor->ConnectToProvider(OTARequestorInterface::kQueryImage);
@@ -272,7 +272,7 @@ void GenericOTARequestorDriver::DriverTriggerQuery()
 void GenericOTARequestorDriver::DefaultProviderTimerHandler(System::Layer * systemLayer, void * appState)
 {
     // In this implementation the default provider timer runs only if there is no other update in progress.
-    // Nevertheless, even though no other timers should be running, call a cleanup method to be safe 
+    // Nevertheless, even though no other timers should be running, call a cleanup method to be safe
     DriverTriggerQuery();
 }
 
