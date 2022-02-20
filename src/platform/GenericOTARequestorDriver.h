@@ -54,10 +54,11 @@ public:
     void UpdateDiscontinued() override;
     void UpdateCancelled() override;
     OTARequestorAction GetRequestorAction(OTARequestorIncomingEvent input) override;
-    void ScheduleDelayedAction(UpdateFailureState state, System::Clock::Seconds32 delay, System::TimerCompleteCallback action, void * aAppState) override;
+    void ScheduleDelayedAction(UpdateFailureState state, System::Clock::Seconds32 delay, System::TimerCompleteCallback action,
+                               void * aAppState) override;
     void CancelDelayedAction(System::TimerCompleteCallback action, void * aAppState) override;
-    void ProcessAnnounceOTAProviders(const ProviderLocationType &providerLocation,
-                                        app::Clusters::OtaSoftwareUpdateRequestor::OTAAnnouncementReason announcementReason) override;
+    void ProcessAnnounceOTAProviders(const ProviderLocationType & providerLocation,
+                                     app::Clusters::OtaSoftwareUpdateRequestor::OTAAnnouncementReason announcementReason) override;
     void DriverTriggerQuery() override;
 
     //// Regular methods
@@ -66,11 +67,11 @@ public:
     void DefaultProviderTimerHandler(System::Layer * systemLayer, void * appState);
 
 private:
-    OTARequestorInterface      * mRequestor           = nullptr;
+    OTARequestorInterface * mRequestor           = nullptr;
     OTAImageProcessorInterface * mImageProcessor = nullptr;
-    uint32_t mOtaStartDelayMs                 = 0;
+    uint32_t mOtaStartDelayMs                    = 0;
 
- using ProviderLocationType             = app::Clusters::OtaSoftwareUpdateRequestor::Structs::ProviderLocation::Type;
+    using ProviderLocationType = app::Clusters::OtaSoftwareUpdateRequestor::Structs::ProviderLocation::Type;
     Optional<ProviderLocationType> mLastProviderLocation; // Provider location used for the last query or update
 };
 
