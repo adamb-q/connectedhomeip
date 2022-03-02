@@ -44,7 +44,7 @@ CHIP_ERROR OTAImageProcessorImpl::Apply()
     ChipLogProgress(SoftwareUpdate, "Q: Applying - resetting device");
 
     // Reset into Bootloader
-    qvCHIP_OtaReset();
+    qvCHIP_OtaReset(); 
 
     return CHIP_NO_ERROR;
 }
@@ -110,8 +110,8 @@ void OTAImageProcessorImpl::HandleFinalize(intptr_t context)
     ChipLogProgress(SoftwareUpdate, "Q: HandleFinalize");
 
     // FIXME - Versions need to be filled in
-    qvCHIP_OtaSetPendingImage(imageProcessor->mSwVer /*swVer*/, imageProcessor->mHwVer /*hwVer*/, qvCHIP_OtaGetAreaStartAddress(),
-                              static_cast<std::uint32_t>(imageProcessor->mParams.downloadedBytes) /*imgSz*/);
+    // qvCHIP_OtaSetPendingImage(imageProcessor->mSwVer /*swVer*/, imageProcessor->mHwVer /*hwVer*/, qvCHIP_OtaGetAreaStartAddress(),
+    //                           static_cast<std::uint32_t>(imageProcessor->mParams.downloadedBytes) /*imgSz*/);
 
     imageProcessor->ReleaseBlock();
     // Start from scratch
