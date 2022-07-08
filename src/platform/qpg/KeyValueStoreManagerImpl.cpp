@@ -21,7 +21,7 @@
  *          Platform-specific key value storage implementation
  *          for Qorvo QPG platforms
  */
-
+#include <cstring>
 #include <lib/support/CodeUtils.h>
 #include <platform/KeyValueStoreManager.h>
 
@@ -48,6 +48,7 @@ CHIP_ERROR KeyValueStoreManagerImpl::_Get(const char * key, void * value, size_t
     else if (result != QV_STATUS_NO_ERROR)
     {
         err = CHIP_ERROR_PERSISTED_STORAGE_VALUE_NOT_FOUND;
+        memset(&value[0], 0, value_size);
     }
     if (read_bytes_size)
     {
